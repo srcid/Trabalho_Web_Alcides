@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro Prato</title>
+    <link rel="stylesheet" type="text/css" href="/css/materialize.min.css" />
+</head>
+
+<body>
+    <div th:replace="navbar :: header"></div>
+    <form method="POST" action="/prato/cadastro" th:object="${prato}" enctype="multipart/form-data">
+        <div th:if="${!#strings.isEmpty(mensagem)}">
+            <span th:text="${mensagem}"></span>
+        </div>
+
+        <div th:if="${#fields.hasAnyErrors()}">
+            <div th:each="detailedError: ${#fields.detailedErrors()}">
+                <span th:text = "${detailedError.message}"></span>
+            </div>
+        </div>
+
+        <input type="hidden" th:field="*{codigo}">
+
+        <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Nome" id="first_name" type="text" class="validate" th:field="*{nome}">
+                    <label for="first_name"></label>
+                </div>
+        </div>
+
+        <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Preço" id="first_name" type="text" class="validate" th:field="*{preco}">
+                    <label for="first_name"></label>
+                </div>
+        </div>
+
+        <div class="file-field input-field">
+                <div class="btn">
+                  <span>Imagem</span>
+                  <input type="file" name="imagem">
+                </div>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" type="text" placeholder="Upload one or more files">
+                </div>
+        </div>
+
+        <div class="row">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                <i class="material-icons right"></i>
+            </button>
+        </div>
+
+    </form>
+    <script src="/js/materialize.min.js"> </script>
+</body>
+
+</html>

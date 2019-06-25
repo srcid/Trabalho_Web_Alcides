@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <header th:fragment="header">
+        <div sec:authorize="!hasAnyRole('USER','ADMIN')">
+            <nav>
+                <div class="nav-wrapper">
+                    <ul id="nav-mobile" class="left hide-on-med-and-down">
+                        <li><a th:href="@{/}">Home</a></li>
+                        <li><a th:href="@{/logar}">Logar</a></li>
+                        <li><a th:href="@{/cliente/formulario}">Cadastrar</a></li>
+                        <li><a th:href="@{/prato/listar}">Listar Pratos</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <div sec:authorize="hasRole('USER')">
+            <nav>
+                <div class="nav-wrapper">
+                    <ul id="nav-mobile" class="left hide-on-med-and-down">
+                        <li><a th:href="@{/}">Home</a></li>
+                        <li><a th:href="@{/prato/listar}">Listar Pratos</a></li>
+                        <li><a th:href="@{/logout}">Logout</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <div sec:authorize="hasRole('ADMIN')">
+            <nav>
+                <div class="nav-wrapper">
+                    <ul id="nav-mobile" class="left hide-on-med-and-down">
+                        <li><a th:href="@{/}">Home</a></li>
+                        <li><a th:href="@{/cliente/listar}">Listar Clientes</a></li>
+                        <li><a th:href="@{/prato/formulario/}"> Adicionar Prato</a></li>
+                        <li><a th:href="@{/prato/listar}">Listar Pratos</a></li>
+                        <li><a th:href="@{/logout}">Logout</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <!-- <nav>
+            <div class="nav-wrapper">
+                <ul id="nav-mobile" class="left hide-on-med-and-down">
+                    <li><a th:href="@{/}">Home</a></li>
+                    <li><a th:href="@{/cliente/formulario}">Cadastro Cliente</a></li>
+                    <li><a th:href="@{/cliente/listar}">Listar Clientes</a></li>
+                    <li><a th:href="@{/prato/formulario}">Cadastro Prato</a></li>
+                    <li><a th:href="@{/prato/listar}">Listar Pratos</a></li>
+                </ul>
+            </div>
+        </nav> -->
+    </header>
+</body>
+
+</html>
